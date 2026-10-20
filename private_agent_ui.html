@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light"><meta name="theme-color" content="#ffffff">
+<title>Friday</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1f2937;--t2:#6b7280;--bd:#e5e7eb;--ac:#2563eb;--ok:#16a34a;--wn:#d97706;--er:#dc2626;--sh:0 1px 2px rgba(16,24,40,.06)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.5 -apple-system,"Segoe UI",Roboto,system-ui,sans-serif;display:flex;flex-direction:column;height:100dvh;max-width:560px;margin:0 auto}
+header{padding:calc(14px + env(safe-area-inset-top,0px)) 18px 12px;display:flex;align-items:center;justify-content:space-between;background:var(--card);border-bottom:1px solid var(--bd)}
+header h1{font-size:17px;margin:0;font-weight:600}
+.pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:4px 10px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.view{flex:1;overflow-y:auto;padding:16px;display:none}.view.on{display:block}
+#v-chat.on{display:flex;flex-direction:column}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin:0 0 12px;box-shadow:var(--sh)}
+.card h3{margin:0 0 12px;font-size:12px;font-weight:600;color:var(--t2);letter-spacing:.04em;text-transform:uppercase}
+.row{display:flex;gap:12px}.row>.card{flex:1;margin:0 0 12px}
+.big{font-size:26px;font-weight:600;line-height:1.1}.sm{font-size:12px;color:var(--t2)}
+.hero{display:flex;align-items:center;gap:18px}.hero svg{flex:none}.hero b{font-size:15px}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.li{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bd)}.li:first-child{border-top:0}
+.ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex:none}
+.li div{flex:1;min-width:0;font-size:14px;overflow-wrap:anywhere}.li small{display:block;color:var(--t2);font-size:12px}
+.msgs{flex:1;display:flex;flex-direction:column;gap:8px}
+.m{max-width:86%;padding:10px 14px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.u{align-self:flex-end;background:var(--ac);color:#fff;border-bottom-right-radius:4px}
+.a{align-self:flex-start;background:var(--card);border:1px solid var(--bd);border-bottom-left-radius:4px}
+.empty{text-align:center;color:var(--t2);margin:auto;padding:24px 0}.empty h2{color:var(--tx);font-size:20px;font-weight:600;margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.chip{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:8px 14px;font-size:14px;color:var(--tx);cursor:pointer}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:var(--card);border:1px solid var(--bd);border-radius:16px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--t2);animation:b 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.pend{margin:0 16px 8px;background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--wn);border-radius:12px;padding:14px;box-shadow:0 4px 14px rgba(16,24,40,.12)}
+.pend h4{margin:0 0 6px;font-size:13px;color:var(--wn);font-weight:600}.pend p{margin:0;white-space:pre-wrap;font-size:14px;overflow-wrap:anywhere}
+.pend .r{display:flex;gap:8px;margin-top:12px}.pend input{width:100%;margin-top:10px}
+button,input,textarea{font:inherit;color:var(--tx);background:#fff;border:1px solid var(--bd);border-radius:10px;padding:10px 14px}
+button{cursor:pointer}.pend button{flex:1;font-weight:600}.pend .ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.comp{display:flex;gap:8px;padding:10px 16px;background:var(--card);border-top:1px solid var(--bd)}
+.comp textarea{flex:1;resize:none;height:44px;border-radius:22px;background:var(--bg)}
+.comp button{background:var(--ac);color:#fff;border:0;border-radius:22px;font-weight:600;padding:0 20px}
+nav{display:flex;border-top:1px solid var(--bd);background:var(--card);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;border-radius:0;padding:10px 0 8px;font-size:11px;color:var(--t2);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button.on{color:var(--ac)}nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#lockscr{position:fixed;inset:0;background:var(--bg);z-index:9;display:none;align-items:center;justify-content:center}#lockscr.on{display:flex}
+.lbox{width:84%;max-width:320px;text-align:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px;box-shadow:var(--sh)}
+.lbox h2{margin:0 0 4px;font-size:20px;font-weight:600}.lbox input,.lbox button{width:100%;margin-top:12px;text-align:center;font-size:18px}
+.lbox button{background:var(--ac);color:#fff;border:0;font-weight:600}
+#mic{position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:38px;height:38px;border-radius:50%;padding:0;z-index:5;display:flex;align-items:center;justify-content:center;background:var(--ac);color:#fff;border:0;box-shadow:0 2px 8px rgba(37,99,235,.4)}
+#mic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#mic.on{background:var(--er);animation:pulse 1.4s infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}100%{box-shadow:0 0 0 10px rgba(220,38,38,0)}}
+</style></head><body>
+<div id="lockscr"><div class="lbox"><h2>Friday</h2><div class="sm">Enter your PIN</div><input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN"><button id="unl">Unlock</button><div class="sm" id="lerr" style="color:var(--er);margin-top:10px"></div></div></div>
+<header><h1>Friday</h1><div style="display:flex;gap:8px;align-items:center"><div class="pill"><i></i><span id="mdl">Vault unlocked</span></div><button id="lk" class="chip" style="padding:4px 12px;font-size:12px">Lock</button></div></header>
+
+<section class="view on" id="v-chat"><div class="msgs" id="msgs"></div></section>
+<section class="view" id="v-dash">
+ <div class="card hero"><svg width="120" height="120" viewBox="0 0 120 120" id="ring"></svg>
+  <div><b id="rem"></b><div class="sm" id="rem2"></div><div class="sm" style="margin-top:8px" id="capt"></div></div></div>
+ <div class="card"><h3>Friday everywhere</h3><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div class="sm">Adds a Talk button to your notification bar so you can talk to Friday from any app.</div><button id="evtog" class="chip">Off</button></div></div>
+ <div class="card"><h3>Quick actions</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="qa"></div></div>
+ <div class="row"><div class="card"><div class="sm">Actions today</div><div class="big" id="td">0</div></div>
+  <div class="card"><div class="sm">All-time actions</div><div class="big" id="tot">0</div></div></div>
+ <div class="card"><h3>Spending, last 7 days</h3><svg id="wk" width="100%" viewBox="0 0 300 120"></svg></div>
+ <div class="card"><h3>What the agent did</h3><div id="cnt"></div></div>
+ <div class="card"><h3>Recent purchases</h3><div id="pur"></div></div>
+ <div class="card"><h3>Security</h3><div class="sm" style="line-height:1.8">Encrypted vault on this phone<br>Local only (127.0.0.1), random link token<br>You approve every send, open and purchase<br>Passwords and card numbers never enter the app</div></div>
+</section>
+<section class="view" id="v-act"><div class="card" id="acts"></div></section>
+
+<button id="mic" title="Talk to Friday" aria-label="Talk to Friday"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+<div id="keybox"></div><div id="pend"></div>
+<div class="comp" id="comp"><textarea id="in" placeholder="Ask your agent, or tap the keyboard mic"></textarea><button id="go">Send</button></div>
+<nav>
+ <button class="on" data-v="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
+ <button data-v="dash"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Dashboard</button>
+ <button data-v="act"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Activity</button>
+</nav>
+<script>
+const K=new URLSearchParams(location.search).get('k'),H={'Content-Type':'application/json','X-Token':K},$=i=>document.getElementById(i);
+const api=async(p,b)=>(await fetch(p,b?{method:'POST',headers:H,body:JSON.stringify(b)}:{headers:H})).json();
+const money=x=>'$'+(Math.round(x*100)/100).toLocaleString();
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const NAMES={send_message:'Emails sent',search_flights:'Flight searches',open_url:'Sites opened'};
+let n=-1,wasBusy=null,pid=null,view='chat';
+function show(v){view=v;['chat','dash','act'].forEach(x=>{$('v-'+x).classList.toggle('on',x===v)});
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));$('comp').style.display=v==='chat'?'flex':'none';$('mic').style.bottom=v==='chat'?'calc(136px + env(safe-area-inset-bottom,0px))':'calc(76px + env(safe-area-inset-bottom,0px))'}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+const CH=['Find flights JFK to LAX on Dec 1','Draft an email to ','Remember that ','Open a checkout for '];
+function chat(s){const box=$('msgs');box.innerHTML='';
+ if(!s.chat.length){const e=el('div','empty');e.appendChild(el('h2',0,'What can I do for you?'));e.appendChild(el('div',0,'Flights, emails, notes, checkouts. You approve every action.'));
+  const c=el('div','chips');CH.forEach(t=>{const b=el('button','chip',t.trim());b.onclick=()=>{$('in').value=t;$('in').focus()};c.appendChild(b)});e.appendChild(c);box.appendChild(e)}
+ s.chat.forEach(m=>box.appendChild(el('div','m '+(m.role==='user'?'u':'a'),m.text)));
+ if(s.busy&&!s.pending){const t=el('div','typing');t.append(el('i'),el('i'),el('i'));box.appendChild(t)}
+ const v=$('v-chat');v.scrollTop=v.scrollHeight}
+function ring(s){const p=Math.min(1,s.spent/s.limit),C=2*Math.PI*48,col=p>.8?'var(--er)':'var(--ac)';
+ $('ring').innerHTML='<circle cx="60" cy="60" r="48" fill="none" stroke="var(--bd)" stroke-width="12"/><circle cx="60" cy="60" r="48" fill="none" stroke="'+col+'" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+(p*C)+' '+C+'" transform="rotate(-90 60 60)"/><text x="60" y="58" text-anchor="middle" font-size="20" font-weight="600" fill="var(--tx)">'+money(s.spent)+'</text><text x="60" y="76" text-anchor="middle" font-size="11" fill="var(--t2)">this month</text>';
+ $('rem').textContent=money(Math.max(0,s.limit-s.spent))+' left';$('rem2').textContent='of '+money(s.limit)+' monthly limit';
+ $('capt').textContent='Over '+money(s.cap)+' you must type the amount to approve.'}
+function week(s){const mx=Math.max(1,...s.week.map(w=>w.v));let h='';
+ s.week.forEach((w,i)=>{const bh=Math.max(3,w.v/mx*80),x=8+i*42;
+  h+='<rect x="'+x+'" y="'+(90-bh)+'" width="28" height="'+bh+'" rx="6" fill="'+(w.v?'var(--ac)':'var(--bd)')+'"/><text x="'+(x+14)+'" y="108" text-anchor="middle" font-size="10" fill="var(--t2)">'+w.d.slice(3)+'</text>'+(w.v?'<text x="'+(x+14)+'" y="'+(84-bh)+'" text-anchor="middle" font-size="10" fill="var(--tx)">'+Math.round(w.v)+'</text>':'')});
+ $('wk').innerHTML=h}
+function counts(s){const b=$('cnt');b.innerHTML='';const k=Object.keys(s.counts);if(!k.length){b.appendChild(el('div','sm','Nothing yet.'));return}
+ const mx=Math.max(...k.map(x=>s.counts[x]));k.forEach(x=>{const r=el('div');const t=el('div','sm',(NAMES[x]||x.replace(/_/g,' '))+': '+s.counts[x]);const bar=el('div','bar');const i=el('i');i.style.width=(s.counts[x]/mx*100)+'%';bar.appendChild(i);r.append(t,bar);b.appendChild(r)})}
+function list(box,items,mk){box.innerHTML='';if(!items.length){box.appendChild(el('div','sm','Nothing yet.'));return}items.forEach(i=>box.appendChild(mk(i)))}
+const kind=t=>t.startsWith('send')?['EM','#2563eb']:t.startsWith('search')?['FL','#0d9488']:t.startsWith('purchase')?['$','#d97706']:['WB','#7c3aed'];
+function row(ic,col,a,b){const r=el('div','li'),i=el('span','ic',ic);i.style.background=col;i.style.color='#fff';const d=el('div',0,a);d.appendChild(el('small',0,b));r.append(i,d);return r}
+function pend(p){const box=$('pend');if(!p){box.innerHTML='';pid=null;return}if(pid===p.id)return;pid=p.id;box.innerHTML='';
+ const d=el('div','pend');d.appendChild(el('h4',0,'Waiting for your approval'));d.appendChild(el('p',0,p.text));
+ let inp=null;if(p.kind==='amount'){inp=el('input');inp.placeholder='Type the exact amount';inp.inputMode='decimal';d.appendChild(inp)}
+ const r=el('div','r');[['Approve',1],['Decline',0]].forEach(([l,ok])=>{const b=el('button',ok?'ok':'',l);b.onclick=()=>{api('/api/approve',{id:p.id,ok:!!ok,typed:inp?inp.value:''});box.innerHTML=''};r.appendChild(b)});
+ d.appendChild(r);box.appendChild(d)}
+async function tick(){try{const s=await api('/api/state');if(s.locked){lock(true);return}lock(false);
+ $('mdl').textContent='Vault unlocked · '+s.model.split('/').pop();
+ if(s.chat.length!==n||s.busy!==wasBusy){n=s.chat.length;wasBusy=s.busy;chat(s)}
+ ring(s);week(s);counts(s);$('td').textContent=s.today;$('tot').textContent=Object.values(s.counts).reduce((a,b)=>a+b,0);
+ list($('pur'),s.purchases,p=>row('$','#d97706',p.item+' · '+money(p.amount),p.t.slice(0,16).replace('T',' ')));
+ list($('acts'),s.activity,a=>{const k=kind(a.text);return row(k[0],k[1],a.text,a.t.slice(0,16).replace('T',' '))});
+ EV=!!s.everywhere;$('evtog').textContent=EV?'On':'Off';$('evtog').style.cssText=EV?'background:var(--ok);color:#fff;border-color:var(--ok)':'';pend(s.pending);keycard(s.need_key);voice(s)}catch(e){}}
+async function send(){const i=$('in'),m=i.value.trim();if(!m||wasBusy)return;i.value='';wasBusy=true;await api('/api/chat',{message:m});tick()}
+function lock(on){$('lockscr').classList.toggle('on',on)}
+async function unlock(){const r=await fetch('/api/unlock',{method:'POST',headers:H,body:JSON.stringify({pin:$('pin').value})});const j=await r.json();$('pin').value='';
+ if(j.ok){$('lerr').textContent='';tick()}else $('lerr').textContent=r.status===429?'Too many tries. Wait '+j.wait+'s.':'Wrong PIN'}
+$('unl').onclick=unlock;$('lk').onclick=async()=>{await api('/api/lock',{});lock(true)};
+['Find flights','Draft an email','Save a note','Open a checkout'].forEach((t,i)=>{const b=el('button','chip',t);b.onclick=()=>{show('chat');$('in').value=CH[i];$('in').focus()};$('qa').appendChild(b)});
+function setToast(t){}
+let wl=null;async function wake(on){try{if(on&&navigator.wakeLock){wl=await navigator.wakeLock.request('screen')}else if(wl){await wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(talk&&document.visibilityState==='visible')wake(true)});
+let EV=false;$('evtog').onclick=()=>api('/api/everywhere',{on:!EV}).then(tick);
+let kshown=false;
+function keycard(k){const b=$('keybox');if(!k){b.innerHTML='';kshown=false;return}if(kshown)return;kshown=true;b.innerHTML='';
+ const d=el('div','pend');d.appendChild(el('h4',0,'AI key problem'));
+ d.appendChild(el('p',0,k.code===401?'The key was rejected. Paste a valid one.':k.code===429?'The usage limit was reached. It may reset in a minute, or paste a new key.':'The key was refused (quota or permission). Paste a new key.'));
+ const i=el('input');i.type='password';i.placeholder='Paste a new API key';i.autocomplete='off';d.appendChild(i);
+ const r=el('div','r'),a=el('button','ok','Use new key'),c=el('button',0,'Try again');
+ a.onclick=()=>{const v=i.value.trim();if(v.length<10){i.style.borderColor='var(--er)';return}api('/api/key',{key:v});b.innerHTML='';kshown=false};
+ c.onclick=()=>{api('/api/key',{retry:true});b.innerHTML='';kshown=false};
+ r.append(a,c);d.appendChild(r);b.appendChild(d)}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let talk=false,rec=null,speaking=false,spokenN=-1;
+function listen(){if(!talk||!SR||speaking)return;rec=new SR();rec.lang=navigator.language||'en-IN';rec.interimResults=true;rec.continuous=false;
+ rec.onresult=e=>{const t=Array.from(e.results).map(r=>r[0].transcript).join(' ');$('in').value=t;setToast(t);if(e.results[e.results.length-1].isFinal){try{rec.stop()}catch(x){}send()}};
+ rec.onend=()=>{if(talk&&!wasBusy&&!speaking&&!$('in').value.trim())setTimeout(listen,300)};rec.onerror=()=>{};setToast('Listening...');try{rec.start()}catch(e){}}
+function say(t){if(!window.speechSynthesis){listen();return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[*_`#]/g,''));setToast('Friday: '+t.slice(0,200));speaking=true;u.onend=u.onerror=()=>{speaking=false;listen()};speechSynthesis.speak(u)}
+function voice(s){if(!talk){spokenN=s.chat.length;return}if(s.busy)setToast('Thinking...');const l=s.chat[s.chat.length-1];if(!s.busy&&l&&l.role==='assistant'&&s.chat.length!==spokenN){spokenN=s.chat.length;say(l.text)}}
+$('mic').onclick=()=>{if(!SR){$('in').placeholder='Voice is not supported here. Use the keyboard mic.';return}talk=!talk;$('mic').classList.toggle('on',talk);$('mic').title=talk?'Stop':'Talk to Friday';wake(talk);if(!talk)setToast('');
+ if(talk){speechSynthesis&&speechSynthesis.cancel();listen()}else{try{rec&&rec.stop()}catch(e){}speechSynthesis&&speechSynthesis.cancel();speaking=false}};
+$('go').onclick=send;show('chat');tick();setInterval(tick,500);
+</script></body></html>
